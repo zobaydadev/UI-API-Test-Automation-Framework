@@ -6,6 +6,7 @@ import com.qa.framework.driver.DriverFactory;
 import com.qa.framework.pages.InventoryPage;
 import com.qa.framework.pages.LoginPage;
 import com.qa.framework.utils.JsonUtils;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -15,9 +16,12 @@ public class DataDrivenLoginTest extends BaseUiTest {
 
     @DataProvider(name = "users")
     public Object[][] users() {
-        return JsonUtils.readArray("users.json").stream()
-                .map(o -> new Object[]{(JSONObject) o})
-                .toArray(Object[][]::new);
+        JSONArray array = JsonUtils.readArray("users.json");
+        Object[][] data = new Object[array.size()][1];
+        for (int i = 0; i < array.size(); i++) {
+            data[i][0] = array.get(i);
+        }
+        return data;
     }
 
     @Test(dataProvider = "users", description = "Login outcome matches users.json")
