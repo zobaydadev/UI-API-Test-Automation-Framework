@@ -1,0 +1,5 @@
+[
+  { "username": "standard_user", "password": "secret_sauce", "valid": true,  "expected": "Products" },
+  { "username": "locked_out_user", "password": "secret_sauce", "valid": false, "expected": "locked out" },
+  { "username": "standard_user", "password": "wrong_password", "valid": false, "expected": "do not match" }
+]
